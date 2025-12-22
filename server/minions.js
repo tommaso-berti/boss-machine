@@ -25,8 +25,7 @@ minionsRouter.param('minionId', (req, res, next, minionId) => {
 minionsRouter.get('/:minionId', (req, res, next) => {
     if(req.minion) {
         res.status(200).send(req.minion);
-    }
-    else {
+    } else {
         res.status(404).send('No Minion Found');
     }
 })
@@ -38,29 +37,24 @@ minionsRouter.post('/', (req, res, next) => {
     if (!name || !title || isNaN(salary)) {
         return res.status(400).send({});
     }
-
     const newMinion = addToDatabase(model, {
         ...req.body,
         salary
     });
-
     res.status(201).send(newMinion);
 });
 
 minionsRouter.put('/:minionId', (req, res, next) => {
     const minion = req.minion;
-
     const updatedMinion = updateInstanceInDatabase(model, {
         ...minion,
         name: req.body.name !== undefined ? req.body.name : minion.name,
         title: req.body.title !== undefined ? req.body.title : minion.title,
         salary: req.body.salary !== undefined ? Number(req.body.salary) : minion.salary
     });
-
     if (!updatedMinion || isNaN(updatedMinion.salary)) {
         return res.status(400).send({});
     }
-
     res.status(200).send(updatedMinion);
 });
 
@@ -69,50 +63,9 @@ minionsRouter.delete('/:minionId', (req, res, next) => {
     let deleted = deleteFromDatabasebyId(model, minionId);
     if(!deleted){
         return res.status(404).send({});
-    }
-    else {
+    } else {
         return res.status(204).send();
     }
 })
 
-
 module.exports = minionsRouter;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
