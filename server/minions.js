@@ -1,6 +1,6 @@
 const express = require('express');
 const minionsRouter = express.Router();
-const { getAllFromDatabase, getFromDatabaseById, addToDatabase, updateInstanceInDatabase, deleteFromDatabasebyId, deleteAllFromDatabase } = require("./db");
+const { getAllFromDatabase, getFromDatabaseById, addToDatabase, updateInstanceInDatabase, deleteFromDatabasebyId } = require("./db");
 
 const model = 'minions';
 
