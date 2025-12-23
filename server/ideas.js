@@ -1,6 +1,7 @@
 const express = require('express');
 const ideasRouter = express.Router();
 const { getAllFromDatabase, getFromDatabaseById, addToDatabase, updateInstanceInDatabase, deleteFromDatabasebyId } = require("./db");
+const checkMillionDollarIdea = require("./checkMillionDollarIdea");
 
 const model = 'ideas';
 
@@ -30,7 +31,7 @@ ideasRouter.get('/:ideaId', (req, res) => {
     }
 })
 
-ideasRouter.post('/', (req, res, next) => {
+ideasRouter.post('/', checkMillionDollarIdea, (req, res, next) => {
     const name =  toString(req.body.name);
     const description =  toString(req.body.description);
     const numWeeks = Number(req.body.numWeeks);
